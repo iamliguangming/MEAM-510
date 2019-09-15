@@ -5,21 +5,26 @@
  */
 
 #include "teensy_general.h"  // includes the resources included in the teensy_general.h file
-
+#define COMPAREVALUE =  40000
 float blinkfrequency=0.5;//set the blink frequency to be 50Hz
 float dutycyle = 0.5;
+
 int main(void)
 {
+    TCCR3B = 0x01;
     teensy_clockdivide(0); //set the clock speed
     teensy_led(ON);			// turn on the on board LED
     teensy_wait(1000);		// wait 1000 ms when at 16 MHz
     /* insert your hardware initialization here */
-    for(;;){
+    for(;;)
+    {
         /* insert your main loop code here */
-        teensy_led(TOGGLE);	// switch the led state
-        teensy_wait(1/blinkfrequency/2*1000*(1-dutycyle));		// wait for the blink interval
-        tennsy_led(TOGGLE);
-        tennsy_wait(1/blinkfrequency/2*1000*dutycycle);
+        if (TCNT3 > COMPAREVALUE)
+        {
+        teensy_led(TOGGLE);
+        TCNT3 = 0;
+        }
+
 
     }
     return 0;   /* never reached */
