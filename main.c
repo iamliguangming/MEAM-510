@@ -7,7 +7,7 @@
 #include "teensy_general.h"  // includes the resources included in the teensy_general.h file
 
 float blinkfrequency=0.5;//set the blink frequency to be 50Hz
-float dutycyle = 0.5
+float dutycyle = 0.5;
 int main(void)
 {
     teensy_clockdivide(0); //set the clock speed
