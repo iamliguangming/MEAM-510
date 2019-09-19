@@ -6,7 +6,11 @@
 
 #include "teensy_general.h"  // includes the resources included in the teensy_general.h file
 #include "t_usb.h"
+unsigned int oldtime, tperiod;
+
 #define PRINTNUM(x) m_usb_tx_uint(x); m_usb_tx_char(10);m_usb_tx_char(13);
+
+void waitforpress();
 
 int main(void)
 {
@@ -18,22 +22,21 @@ int main(void)
 
     for(;;)
     {
-    if (bit_is_set(PINC,6))
-    {
-      clear(PORTD,2);
-      PRINTNUM(TCNT3);
-      m_usb_tx_string("Now it's off");
-      while(bit_is_set(PINC,6));
+      waitforpress();
 
     }
-    else if (!bit_is_set(PINC,6))
-    {
-      set(PORTD,2);
-      PRINTNUM(TCNT3);
-      m_usb_tx_string("Now it's on");
-      while(!bit_is_set(PINC,6));
-    }
-}
 
     return 0;   /* never reached */
+}
+
+void waitforpress()
+{
+  while (!bit_is_set(TIFR3,ICF3))
+  {
+    toggle(PORTD,2);
+    set(TIFR3,ICF3);
+    tperiod = ICR3 - oldtime;
+    oldtime = ICR3;
+    PRINTNUM(tperiod);
+  }
 }
