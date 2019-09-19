@@ -20,13 +20,13 @@ int main(void)
     if (bit_is_set(PINC,6))
     {
       clear(PORTD,2);
-      PRINTNUM(TCNT3);
+      m_usb_tx_uint(TCNT3);
 
     }
     else if (!bit_is_set(PINC,6))
     {
       set(PORTD,2);
-      PRINTNUM(TCNT3);
+      m_usb_tx_uint(TCNT3);
     }
 }
 
