@@ -11,19 +11,17 @@ unsigned int oldtime, tperiod;
 #define PRINTNUM(x) m_usb_tx_uint(x); m_usb_tx_char(10);m_usb_tx_char(13);
 
 void waitforpress();
-void toggle_led();
 
 
 int main(void)
 {
     m_usb_init();
-    set(DDRD,2);
     set(TCCR3B,CS30);
     set(TCCR3B,CS32);
-    clear(PORTD,2);
 
     for(;;)
     {
+      m_usb_tx_string("time between last hit");
       waitforpress();
 
     }
@@ -41,9 +39,4 @@ void waitforpress()
     oldtime = ICR3;
     PRINTNUM(tperiod);
   }
-}
-
-void toggle_led()
-{
-  toggle(PORTD,2);
 }
