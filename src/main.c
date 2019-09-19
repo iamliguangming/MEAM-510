@@ -11,7 +11,7 @@ int main(void)
     m_usb_init();
     clear(DDRC,6);
     set(DDRD,2);
-    while(1)
+    for(;;)
     {
     if (bit_is_set(PORTC,6))
     {
