@@ -21,6 +21,6 @@ int main(void)
       set(PORTD,2);
     }
 
-    }
+
     return 0;   /* never reached */
 }
