@@ -33,7 +33,7 @@
 #define set(reg,bit)		(reg) |= (1<<(bit))
 #define clear(reg,bit)		(reg) &= ~(1<<(bit))
 #define toggle(reg,bit)		(reg) ^= (1<<(bit))
-
+#define bit_is_set(reg,bit) if (bit == 0){return 0;} else if(bit ==1){return 1;}
 // -----------------------------------------------------------------------------
 // Disable JTAG to access F4-F7:
 // -----------------------------------------------------------------------------
