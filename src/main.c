@@ -33,7 +33,6 @@ void waitforpress()
 {
   while (!bit_is_set(TIFR3,ICF3))
   {
-    toggle_led();
     set(TIFR3,ICF3);
     tperiod = ICR3 - oldtime;
     oldtime = ICR3;
