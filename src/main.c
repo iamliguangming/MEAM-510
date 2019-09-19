@@ -5,7 +5,7 @@
  */
 
 #include "teensy_general.h"  // includes the resources included in the teensy_general.h file
-
+#include "t_usb.h"
 int main(void)
 {
     m_usb_init();
