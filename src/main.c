@@ -22,6 +22,7 @@ int main(void)
     {
       clear(PORTD,2);
       PRINTNUM(TCNT3);
+      m_usb_tx_string("Now it's off");
       while(bit_is_set(PINC,6));
 
     }
@@ -29,6 +30,7 @@ int main(void)
     {
       set(PORTD,2);
       PRINTNUM(TCNT3);
+      m_usb_tx_string("Now it's on");
       while(!bit_is_set(PINC,6));
     }
 }
