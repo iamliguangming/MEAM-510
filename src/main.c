@@ -13,11 +13,11 @@ int main(void)
     set(DDRD,2);
     for(;;)
     {
-    if (bit_is_set(PORTC,6))
+    if (bit_is_set(PINC,6))
     {
       clear(PORTD,2);
     }
-    else if (!bit_is_set(PORTC,6))
+    else if (!bit_is_set(PINC,6))
     {
       set(PORTD,2);
     }
