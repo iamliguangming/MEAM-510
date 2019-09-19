@@ -15,18 +15,21 @@ int main(void)
     set(DDRD,2);
     set(TCCR3B,CS30);
     set(TCCR3B,CS32);
+
     for(;;)
     {
     if (bit_is_set(PINC,6))
     {
       clear(PORTD,2);
       m_usb_tx_uint(TCNT3);
+      while(bit_is_set(PINC,6));
 
     }
     else if (!bit_is_set(PINC,6))
     {
       set(PORTD,2);
       m_usb_tx_uint(TCNT3);
+      while(!bit_is_set(PINC,6));
     }
 }
 
