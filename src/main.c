@@ -12,6 +12,7 @@ int main(void)
     clear(DDRC,6);
     set(DDRD,2);
     while(1)
+    {
     if (bit_is_set(PORTC,6))
     {
       clear(PORTD,2);
@@ -20,7 +21,7 @@ int main(void)
     {
       set(PORTD,2);
     }
-
+}
 
     return 0;   /* never reached */
 }
