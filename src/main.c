@@ -16,6 +16,7 @@ void waitforpress();
 int main(void)
 {
     m_usb_init();
+    set(TCCR3B,ICES3);
     set(TCCR3B,CS30);
     set(TCCR3B,CS32);
 
