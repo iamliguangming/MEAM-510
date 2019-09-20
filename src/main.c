@@ -16,7 +16,6 @@ void waitforpress();
 int main(void)
 {
     m_usb_init();
-    set(TCCR3B,ICES3);
     set(TCCR3B,CS30);
     set(TCCR3B,CS32);
 
@@ -32,11 +31,9 @@ int main(void)
 
 void waitforpress()
 {
-  while (!bit_is_set(TIFR3,ICF3))
-  {
+  while (!bit_is_set(TIFR3,ICF3));
     set(TIFR3,ICF3);
     tperiod = ICR3 - oldtime;
     oldtime = ICR3;
     PRINTNUM(tperiod);
-  }
 }
