@@ -1,8 +1,9 @@
 /* Name: main.c
- * Author: <insert your name here>
+ * Author: <Yupeng Li>
  * Copyright: <insert your copyright message here>
  * License: <insert your license reference here>
  */
+ //nothing changed in this file
 
 #include "teensy_general.h"  // includes the resources included in the teensy_general.h file
 #include "t_usb.h"
