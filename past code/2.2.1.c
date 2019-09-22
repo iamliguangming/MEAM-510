@@ -18,13 +18,13 @@ int main(void)
     {
     if (bit_is_set(PINC,7))
     {
-      set(PORTD,2);
+      clear(PORTD,2);
       while(bit_is_set(PINC,7));
 
     }
     else if (!bit_is_set(PINC,7))
     {
-      clear(PORTD,2);
+      set(PORTD,2);
       while(!bit_is_set(PINC,7));
     }
 }
