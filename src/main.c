@@ -21,18 +21,24 @@ int main(void)
     for(;;)
     {
       waitfortrigger();
-      if(tperiod >= 30)
+      if(tperiod >= 30 && tperiod <=52)
       {
         set(PORTD,2);
         clear(PORTD,1);
         PRINTNUM(tperiod);
       }
-      else if (tperiod < 30)
+      else if (tperiod < 30 && tperiod >=15)
       {
         set(PORTD,1);
         clear(PORTD,2);
         PRINTNUM(tperiod);
       }
+      else if(tperiod > 52 || tperiod < 15)
+      {
+        clear(PORTD,2);
+        clear(PORTD,1);
+      }
+    
 
     }
 
