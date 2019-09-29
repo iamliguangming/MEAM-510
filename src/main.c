@@ -74,13 +74,28 @@ int main(void)//the main function
           synccount = 0;//clear the number of counts whenever an x/y signal pulse is detected
           if (yflag == 1)//if the y flag is raised, the incoming signal must be y signal
           {
+            if(startofpulse >= lastsync)//in the case of not rolling over
+            {
             lastY = startofpulse - lastsync;//record the most recent Y time as the interval between y signal and the last sync
+
+            }
+            else if(startofpulse < lastsync)//in the case of rollover
+            {
+            lastY = 65535 - lastsync + startofpulse;
+            }
             yflag = 0;//clear the y flag
 
           }
           if (xflag == 1)//if the x flag is already raised,treat this pulse as x pulse
           {
-            lastX = startofpulse - lastsync; //calculate the time between x pulse and the most recent sync pulse
+            if (startofpulse >= lastsync)//in the case of not rolling over
+             {
+               lastX = startofpulse - lastsync; //calculate the time between x pulse and the most recent sync pulse
+             }
+            else if (startofpulse < lastsync)//in the case of rolling over
+            {
+              lastX = 65535 - lastsync + startofpulse;
+            }
             yflag = 1;//if we already see an x pulse coming, the next signal pulse must be y pulse, set the y falg here
             xflag = 0;//clear the x flag after the latest x time has been recorded
 
