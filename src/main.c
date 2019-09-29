@@ -65,6 +65,12 @@ int main(void)//the main function
       {
          // PRINTNUM(0);
           synccount = 0;//clear the number of counts whenever an x/y signal pulse is detected
+          if (yflag == 1)//if the y flag is raised, the incoming signal must be y signal
+          {
+            lastY = startofpulse - lastsync;//record the most recent Y time as the interval between y signal and the last sync
+            yflag = 0;//clear the y flag
+
+          }
           if (xflag == 1)//if the x flag is already raised,treat this pulse as x pulse
           {
             lastX = startofpulse - lastsync; //calculate the time between x pulse and the most recent sync pulse
@@ -72,12 +78,7 @@ int main(void)//the main function
             xflag = 0;//clear the x flag after the latest x time has been recorded
 
           }
-          if (yflag == 1)//if the y flag is raised, the incoming signal must be y signal
-          {
-            lastY = startofpulse - lastsync;//record the most recent Y time as the interval between y signal and the last sync
-            yflag = 0;//clear the y flag
 
-          }
 
       }
       PRINTSTRING("The time between last X Y pulse and Sync pulse is:");//print out the time for last x pulse and last y pulse
