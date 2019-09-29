@@ -34,7 +34,14 @@ int main(void)//the main function
       toggle(TCCR3B,ICES3);//change the input capture from rising edge to falling edge
       while (!bit_is_set(TIFR3,ICF3));//wait until a falling edge is captured
       endofpulse = ICR3;//store the falling edge time in a constant
+      if (startofpulse > endofpulse)//incase of rollover
+      {
+        pulsewidth = 65535 - startofpulse + endofpulse;//calculate the actual pulse width
+      }
+      else//in the case of not rolling over
+      {
       pulsewidth = endofpulse - startofpulse;//calculate the pulsewidth based on the rising time and falling time
+      }
       set(TIFR3, ICF3);//set the input capture flag
       toggle(TCCR3B,ICES3);//change the input capture from falling edge to rising edge
       if (pulsewidth >= 12 && pulsewidth < 68)//if the pulse width is within the range of a sync pulse
