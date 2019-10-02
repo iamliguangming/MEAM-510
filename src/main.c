@@ -14,7 +14,7 @@ int synccount = 0;//set a counter for number of synctimes
 int yflag = 0;//set a flag when y should be the short pulse
 unsigned int startofpulse, endofpulse, pulsewidth;//values that are used to record time of the pulse and pulse width
 unsigned int lastY, lastX, lastsync;//values that are used to store last sync time and last x or y pulse time
-
+unsigned int lastXinus, lastYinus;
 int main(void)//the main function
 {
     m_usb_init();//initiate the usb module
@@ -82,6 +82,7 @@ int main(void)//the main function
             else if(startofpulse < lastsync)//in the case of rollover
             {
             lastY = 65535 - lastsync + startofpulse;
+            lastYinus = lastY*64*1000000/(8*10^6);
             }
             yflag = 0;//clear the y flag
 
@@ -95,6 +96,7 @@ int main(void)//the main function
             else if (startofpulse < lastsync)//in the case of rolling over
             {
               lastX = 65535 - lastsync + startofpulse;
+              lastXinus = lastX*64*1000000/(8*10^6);
             }
             yflag = 1;//if we already see an x pulse coming, the next signal pulse must be y pulse, set the y falg here
             xflag = 0;//clear the x flag after the latest x time has been recorded
@@ -104,9 +106,9 @@ int main(void)//the main function
 
       }
       PRINTSTRING("The time between last X Y pulse and Sync pulse is:");//print out the time for last x pulse and last y pulse
-      m_usb_tx_uint(lastX);//print out the last x time
+      m_usb_tx_uint(lastXinus);//print out the last x time
       m_usb_tx_char(3);// print out three spaces
-      PRINTNUM(lastY);//print out the last y time and print a line
+      PRINTNUM(lastYinus);//print out the last y time and print a line
     }
 
 
